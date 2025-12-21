@@ -1,11 +1,7 @@
-use std::fs;
-use std::io;
+use std::error::Error;
+use std::fs::File;
+fn main() -> Result<(), Box<dyn Error>> {
+    let _greeting_file = File::open("hello.txt")?;
 
-fn main() {
-    let greeting_file =
-        File::open("hello.txt").expect("hello.txt should be included in this project");
-}
-
-fn read_username_from_file() -> Result<String, io::Error> {
-    fs::read_to_string("hello.txt")
+    Ok(())
 }
