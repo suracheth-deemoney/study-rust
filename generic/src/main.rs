@@ -15,6 +15,15 @@ struct Point<T, U> {
     y: U,
 }
 
+impl<T, U> Point<T, U> {
+    fn mixup<T1, U1>(self, other: Point<T1, U1>) -> Point<T, U1> {
+        Point {
+            x: self.x,
+            y: other.y,
+        }
+    }
+}
+
 struct SingleTypePoint<T> {
     x: T,
     y: T,
@@ -43,9 +52,17 @@ fn main() {
 
     println!("The largest number is {result}");
 
-    let _point_both_integer = Point { x: 5, y: 10 };
+    let point_both_integer = Point { x: 5, y: 10 };
     let _point_both_float = Point { x: 1.0, y: 4.0 };
+    let point_string_and_char = Point { x: "Hello", y: 'c' };
     let _point_integer_and_float = Point { x: 5, y: 4.0 };
+
+    let point_mix_up = point_both_integer.mixup(point_string_and_char);
+
+    println!(
+        "point_mix_up.x = {:?}, point_mix_up.y = {}",
+        point_mix_up.x, point_mix_up.y
+    );
 
     let p = SingleTypePoint { x: 5.0, y: 10.0 };
 
