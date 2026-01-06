@@ -8,7 +8,7 @@ impl Drop for CustomSmartPointer {
     }
 }
 fn main() {
-    let _c = CustomSmartPointer {
+    let c = CustomSmartPointer {
         data: String::from("my stuff"),
     };
 
@@ -17,4 +17,8 @@ fn main() {
     };
 
     println!("CustomSmartPointer created!");
+
+    drop(c);
+
+    println!("CustomSmartPointer dropped before the end of main.");
 }
