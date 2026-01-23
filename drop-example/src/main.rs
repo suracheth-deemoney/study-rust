@@ -4,21 +4,27 @@ struct CustomSmartPointer {
 
 impl Drop for CustomSmartPointer {
     fn drop(&mut self) {
-        println!("Dropping CustomSmartPointer with data `{}`", self.data);
+        println!("Dropping CustomSmartPointer with data `{}` !", self.data);
     }
 }
+
 fn main() {
     let c = CustomSmartPointer {
         data: String::from("my stuff"),
     };
 
-    let _d = CustomSmartPointer {
+    let d = CustomSmartPointer {
         data: String::from("other stuff"),
+    };
+
+    let e = CustomSmartPointer {
+        data: String::from("some data"),
     };
 
     println!("CustomSmartPointer created!");
 
+    // c.drop(); is not allowed
     drop(c);
 
-    println!("CustomSmartPointer dropped before the end of main.");
+    println!("CustomSmartPointer for `c` dropped before the end of main");
 }
