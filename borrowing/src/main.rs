@@ -1,3 +1,5 @@
 fn main() {
-    println!("Hello, world!");
+    let x = 5;
+    // We can't create mutable reference to the immutable
+    // let y = &mut x;
 }
