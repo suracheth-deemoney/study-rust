@@ -1,3 +1,24 @@
+use std::env;
+use trpl::Html;
+
+async fn page_title(url: &str) -> Option<String> {
+    let response = trpl::get(url).await;
+    let response_text = response.text().await;
+    // Or response_text = trpl::get(url).await.text().await;
+
+    Html::parse(&response_text)
+        .select_first("title")
+        .map(|title_element| title_element.inner_html())
+}
+
 fn main() {
-    println!("Hello, world!");
+    let args: Vec<String> = env::args().collect();
+
+    trpl::run(async {
+        let url = &args[1];
+        match page_title(url).await {
+            Some(title) => println!("the title for {url} was {title}"),
+            None => println!("{url} had no title"),
+        }
+    })
 }
